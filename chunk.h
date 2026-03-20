@@ -111,6 +111,13 @@ typedef enum {
 //< op-enum
 //> chunk-struct
 
+// Chapter 14 - Challenge Question 2
+typedef enum {
+  OP_CONSTANT,
+  OP_CONSTANT_LONG, // <--
+  OP_RETURN,
+} OpCode;
+
 typedef struct {
 //> count-and-capacity
   int count;
@@ -149,5 +156,9 @@ int addConstant(Chunk* chunk, Value value);
 // Chapter 14 - Challenge Question 1
 // Added getLine helper
 int getLine(Chunk* chunk, int instruction);
+
+// Chapter 14 - Challenge Question 2
+// Added writeConstant helper
+void writeConstant(Chunk* chunk, Value value, int line);
 
 #endif
