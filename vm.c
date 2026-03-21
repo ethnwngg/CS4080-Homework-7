@@ -413,9 +413,8 @@ static InterpretResult run() {
 #define READ_BYTE() (*vm.ip++)
 */
 #define READ_BYTE() (*frame->ip++)
-/* A Virtual Machine read-constant < Calls and Functions run
 #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
-*/
+
 
 /* Jumping Back and Forth read-short < Calls and Functions run
 #define READ_SHORT() \
@@ -447,15 +446,11 @@ static InterpretResult run() {
     } while (false)
 */
 //> Types of Values binary-op
+// Chapter 15 - Challenge Question 4
 #define BINARY_OP(valueType, op) \
     do { \
-      if (!IS_NUMBER(peek(0)) || !IS_NUMBER(peek(1))) { \
-        runtimeError("Operands must be numbers."); \
-        return INTERPRET_RUNTIME_ERROR; \
-      } \
-      double b = AS_NUMBER(pop()); \
-      double a = AS_NUMBER(pop()); \
-      push(valueType(a op b)); \
+      vm.stackTop[-2] = vm.stackTop[-2] op vm.stackTop[-1]; \
+      vm.stackTop--; \
     } while (false)
 //< Types of Values binary-op
 

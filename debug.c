@@ -169,8 +169,11 @@ int disassembleInstruction(Chunk* chunk, int offset) {
 //< Types of Values disassemble-not
 //< A Virtual Machine disassemble-binary
 //> A Virtual Machine disassemble-negate
+
+  // Chapter 15 - Challenge Question 4
     case OP_NEGATE:
-      return simpleInstruction("OP_NEGATE", offset);
+      vm.stackTop[-1] = -vm.stackTop[-1];
+      //return simpleInstruction("OP_NEGATE", offset);
 //< A Virtual Machine disassemble-negate
 //> Global Variables disassemble-print
     case OP_PRINT:
